@@ -84,16 +84,16 @@ module.exports.run = async function({ api, event, args, prefix, admin }) {
 				api.sendMessage({
 						body: `➢ Admin and Bot Information
 
-⁂ Bot Name: ${BOTNAME}
-✧ Bot Admin: 𝗖𝗹𝗶𝗳𝗳 𝗩𝗶𝗻𝗰𝗲𝗻𝘁
-♛ Bot Admin Link: https://www.facebook.com/${admin}
-❂ Bot Prefix: ${prefix}
-✫ Files Owner: ${FILESOWNER}
-➟ UPTIME ${uptimeString}
-✬ Today is: ${juswa} 
+❐ Bot Name: ${BOTNAME}
+❐ Bot Admin: 𝗞𝗬𝗟𝗘 𝗕𝗔𝗜𝗧-𝗜𝗧
+❐ Bot Admin Link: https://www.facebook.com/${admin}
+❐ Bot Prefix: ${prefix}
+❐ Files Owner: ${FILESOWNER}
+❐ UPTIME ${uptimeString}
+❐ Today is: ${juswa} 
 
-➳ Bot is running ${hours}:${minutes}:${seconds}.
-✫ Thanks for using my bot`,
+❐ Bot is running ${hours}:${minutes}:${seconds}.
+❐ Thanks for using my bot`,
 						attachment: fs.createReadStream(__dirname + "/cache/owner_video.mp4")
 				}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/owner_video.mp4"));
 		};
