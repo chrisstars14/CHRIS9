@@ -1,36 +1,44 @@
-/* 
-If you encounter any errors, please give me feedback. Contact me on facebook https://facebook.com/joshg101
-*/
-
-const { get } = require('axios');
-let url = "https://deku-rest-api.replit.app";
-
-module.exports.config = {
-	name: "Ai",
-	version: "1.0.0",
-	role: 0,
-	hasPrefix: false,
-	credits: "Deku",
-	description: "Talk to AI with continuous conversation.",
-	aliases:  [],
-	usages: "[prompt]",
-	cooldown: 0,
+const fonts = {
+  a: "𝖺", b: "𝖻", c: "𝖼", d: "𝖽", e: "𝖾", f: "𝖿", g: "𝗀", h: "𝗁",
+  i: "𝗂", j: "𝗃", k: "𝗄", l: "𝗅", m: "𝗆", n: "𝗇", o: "𝗈", 
+  p: "𝗉", q: "𝗊", r: "𝗋", s: "𝗌", t: "𝗍", u: "𝗎", v: "𝗏", 
+  w: "𝗐", x: "𝗑", y: "𝗒", z: "𝗓" 
 };
 
-module.exports.run = async function({ api, event, args }) {
-	function sendMessage(msg) {
-		api.sendMessage(msg, event.threadID, event.messageID);
-	}
+const axios = require('axios');
 
-	if (!args[0]) return sendMessage('Please provide a question first.');
+module.exports.config = {
+  name: "ai",
+  version: 1.0,
+  credits: "megan",//Api OtinXsandip
+  description: "AI",
+  hasPrefix: false,
+  usages: "{pn} [prompt]",
+  aliases: ["bot"],
+  cooldown: 0,
+};
 
-	const prompt = args.join(" ");
+module.exports.run = async function ({ api, event, args }) {
+  try {
+    const prompt = args.join(" ");
+    if (!prompt) {
+      await api.sendMessage("-OPENAI ˕ •マ:\n━━━━━━━━━━━\n /)___/)    ♡\n꒰ ˶• ༝ - ˶꒱ \n./づ~🍜", event.threadID);
+      return;
+    }
+    const response = await axios.get(`https://sandipbaruwal.onrender.com/gpt?prompt=${encodeURIComponent(prompt)}`);
+    const answer = response.data.answer;
 
-	try {
-		const response = await get(`${url}/gpt3?prompt=${encodeURIComponent(prompt)}&uid=${event.senderID}`);
-		const data = response.data;
-		return sendMessage(data);
-	} catch (error) {
-		return sendMessage(error.message);
-	}
-}
+    let formattedAnswer = "";
+    for (let char of answer) {
+      if (fonts[char.toLowerCase()]) {
+        formattedAnswer += fonts[char.toLowerCase()];
+      } else {
+        formattedAnswer += char;
+      }
+    }
+
+    await api.sendMessage(`openai- ˕ •マ:\n━━━━━━━━━━━\n${formattedAnswer} ⚡`, event.threadID);
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+};￼Enter
