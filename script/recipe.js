@@ -3,7 +3,7 @@ module.exports.config = {
   name: "recipe",
   version: "1.0.0",
   role: 0,
-  hasPrefix: false,
+  hasPrefix: true,
   description: "Get a random recipe.",
   usage: "recipe",
   credits: "Developer",
